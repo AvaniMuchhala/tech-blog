@@ -1,0 +1,44 @@
+/* CSS Variables */
+:root {
+    --dark: rgb(154, 6, 6);
+    --light: rgb(255, 214, 184);
+}
+
+body {
+    background-color: var(--light);
+}
+
+nav {
+    padding-top: 1.5%;
+}
+
+li {
+    list-style: none;
+    display: inline;
+    font-size: 2.2rem;
+    padding: 2%;
+    
+}
+
+li a {
+    color: var(--light);
+}
+
+header {
+    background-color: var(--dark);
+    color: white;
+    height: 12rem;
+    position: relative;
+}
+
+/* Tech Blog Title */
+#title-box {
+    background-color: var(--light);
+    color: var(--dark);
+    width: 20%;
+    position: absolute;
+    left: 6%;
+    bottom: 3%;
+    text-align: center;
+    font-size: 2.7rem;
+}
