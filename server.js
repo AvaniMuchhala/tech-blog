@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+// Initializes Sequelize with session store
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Import modules
 const routes = require('./controllers');
@@ -11,6 +13,23 @@ const helpers = require('./utils/helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Sets up session and connect to our Sequelize db
+const sess = {
+    secret: process.env.SECRET,
+    cookie: {
+      // Cookie (and session) will expire after one hour
+      maxAge: 60 * 60 * 1000
+    },
+    resave: false,
+    saveUninitialized: true,
+    // Sets up session store
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
+  };
+  
+  app.use(session(sess));
 
 // Create the Handlebars.js engine object with custom helper functions
 const hbs = exphbs.create({ helpers });
