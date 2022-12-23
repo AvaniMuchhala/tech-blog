@@ -13,18 +13,6 @@ Blogpost.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-// Blogpost can have many comments from different users
-// (if delete blogpost, also delete associated comments)
-Blogpost.hasMany(Comment, {
-    foreignKey: 'comment_id',
-    onDelete: 'CASCADE'
-});
-
-// Comments belong to a blogpost
-Comment.belongsTo(Blogpost, {
-    foreignKey: 'comment_id'
-});
-
 // User can have many comments (if delete user, delete their comments too)
 User.hasMany(Comment, {
     foreignKey: 'user_id',
@@ -36,5 +24,16 @@ Comment.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
+// Blogpost can have many comments from different users
+// (if delete blogpost, also delete associated comments)
+Blogpost.hasMany(Comment, {
+    foreignKey: 'blogpost_id',
+    onDelete: 'CASCADE'
+});
+
+// Comments belong to a blogpost
+Comment.belongsTo(Blogpost, {
+    foreignKey: 'blogpost_id'
+});
 
 module.exports = { User, Blogpost, Comment };

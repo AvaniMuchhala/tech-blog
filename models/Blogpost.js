@@ -30,16 +30,7 @@ Blogpost.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'User',
-                key: 'id'
-            }
-        },
-        // Foreign key that references ID in Comment model
-        // Keep track of comments posted on this blogpost
-        comment_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Comment',
+                model: 'user',
                 key: 'id'
             }
         }

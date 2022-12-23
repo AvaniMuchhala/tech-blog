@@ -26,7 +26,17 @@ Comment.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'User',
+                model: 'user',
+                key: 'id'
+            }
+        },
+        // Foreign key that references ID in Blogpost model
+        // Keeps track of the blogpost that this comment belongs to
+        blogpost_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'blogpost',
                 key: 'id'
             }
         }
