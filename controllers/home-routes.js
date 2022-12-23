@@ -15,4 +15,15 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Sign up route
+router.get('/signup', (req, res) => {
+    // If already logged in, redirect user to homepage
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    } 
+    // If not logged in, render signup page
+    res.render('signup');
+});
+
 module.exports = router;
