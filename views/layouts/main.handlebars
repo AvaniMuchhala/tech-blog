@@ -36,7 +36,10 @@
     <section class="d-flex justify-content-center">
         {{{body}}}
     </section>
-    
+
+    {{#if loggedIn}}
+    <script src="./js/idle-checker.js"></script>
+    {{/if}}
 </body>
 
 </html>

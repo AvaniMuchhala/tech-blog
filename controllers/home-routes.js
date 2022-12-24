@@ -67,7 +67,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 })
 
 // At /posts/:id, show all comments on blogpost and new comment form
-router.get('/posts/:id', withAuth, async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
     try {
         console.log('\nReached /posts/:id \n');
 
@@ -129,7 +129,7 @@ router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
     }
 });
 
-// Login route
+// Render login form
 router.get('/login', (req, res) => {
     // If already logged in, redirect user to dashboard
     if (req.session.loggedIn) {

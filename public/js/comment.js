@@ -14,8 +14,14 @@ const commentFormHandler = async (event) => {
         });
 
         if (response.ok) {
-            console.log('Commented succesfully!');
-            location.reload();
+            // If user not logged in, withAuth sends res.redirect('/login'), so force browser to go to /login
+            if (response.redirected) {
+                document.location.replace('/login');
+            // If user logged in, new comment was added successfully
+            } else {
+                console.log('Commented succesfully!');
+                document.location.reload();
+            }
         } else {
             alert('Failed to submit comment.');
         }

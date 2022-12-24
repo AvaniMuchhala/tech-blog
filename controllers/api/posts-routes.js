@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const { User, Blogpost, Comment } = require('../../models');
+// Custom middleware to check whether user is logged in or not
+const withAuth = require('../../utils/withAuth');
 
 // POST request to create new comment
-router.post('/:id/comments', async (req, res) => {
+router.post('/:id/comments', withAuth, async (req, res) => {
     console.log('\nReached /:id/comments');
     console.log(req.session);
     try {
@@ -21,7 +23,7 @@ router.post('/:id/comments', async (req, res) => {
 });
 
 // POST request to create new blogpost
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     console.log('\nReached /posts');
     console.log(req.body);
     try {
@@ -39,7 +41,7 @@ router.post('/', async (req, res) => {
 });
 
 // Delete user's blogpost with same ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     console.log('\n Reached /posts/:id');
 
     try {
@@ -63,7 +65,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Update user's blogpost with same ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     console.log('\n Reached PUT request at /posts/:id');
 
     try {
