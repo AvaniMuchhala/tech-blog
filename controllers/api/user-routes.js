@@ -29,10 +29,11 @@ router.post('/login', async (req, res) => {
         // If password correct, set loggedIn to true
         req.session.save(() => {
             req.session.loggedIn = true;
+            req.session.userId = dbUserData.id;
             console.log('\nLogged in\n');
             res.status(200).json({ user: dbUserData, message: 'Successfully logged in!' });
             return;
-        })
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -49,6 +50,7 @@ router.post('/signup', async (req, res) => {
 
         req.session.save(() => {
             req.session.loggedIn = true;
+            req.session.userId = userData.id;
             console.log('\nSigned up\n');
             res.status(200).json(userData);
             return;

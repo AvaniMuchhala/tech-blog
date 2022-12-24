@@ -30,14 +30,68 @@ router.get('/home', async (req, res) => {
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {
-    res.render('dashboard', {
-        loggedIn: req.session.loggedIn
-    });
+    try {
+        const blogpostData = await Blogpost.findAll({
+            where: {
+                user_id: req.session.userId
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        });
+
+        const blogposts = blogpostData.map((post => post.get({ plain: true })));
+
+        res.render('dashboard', {
+            blogposts,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    };
 })
+
+router.get('/posts/:id', withAuth, async (req, res) => {
+    try {
+        console.log('\nReached /posts/:id \n');
+
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+
+                        }
+                    ]
+                }
+        ]});
+    
+        console.log(blogpostData);
+
+        const blogpost = blogpostData.get({ plain: true });
+    
+        res.render('post', {
+            blogpost,
+            comments: blogpost.comments,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 // Login route
 router.get('/login', (req, res) => {
-    // If already logged in, redirect user to homepage
+    // If already logged in, redirect user to dashboard
     if (req.session.loggedIn) {
         res.redirect('/dashboard');
         return;
@@ -48,7 +102,7 @@ router.get('/login', (req, res) => {
 
 // Sign up route
 router.get('/signup', (req, res) => {
-    // If already logged in, redirect user to homepage
+    // If already logged in, redirect user to dashboard
     if (req.session.loggedIn) {
         res.redirect('/');
         return;

@@ -1,0 +1,52 @@
+{{!-- Single blogpost --}}
+{{log this}}
+
+<section class="d-flex flex-column">
+    <section class="card" id="post-{{blogpost.id}}">
+        <section class="card-header d-flex justfiy-content-between">
+            <p>{{blogpost.title}} </p>
+            <p>{{blogpost.user.username}} </p>
+            <p>{{blogpost.date_created}}</p>
+        </section>
+
+        <section class="card-body">
+            {{blogpost.content}}
+        </section>
+    </section>
+
+    {{!-- Comments form --}}
+    <section class="card">
+        <section class="card-header d-flex justfiy-content-between">
+        </section>
+
+        <section class="card-body">
+            <form class="d-flex flex-column">
+                <label for="comment">Comment</label>
+                <input type="text" id="comment">
+                <input type="hidden" id="post-id" value={{blogpost.id}}>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+    </section>
+
+    <section class="comments-section d-flex flex-column">
+    {{#each comments as |comment|}}
+
+    <section class="card" id="comment-{{comment.id}}">
+        <section class="card-header d-flex justfiy-content-between">
+            <p>{{comment.user.username}} </p>
+            <p>{{comment.date_created}}</p>
+        </section>
+
+        <section class="card-body">
+            {{comment.body}}
+        </section>
+
+    </section>
+
+    {{/each}}
+</section>
+</section>
+
+<script type="text/javascript" src="../js/comment.js"></script>
