@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { User, Blogpost, Comment } = require('../models');
+// Custom middleware to check whether user is logged in or not
 const withAuth = require('../utils/withAuth');
 
+// At /, redirect user to /home
 router.get('/', async (req, res) => {
     res.redirect('/home');
 });
@@ -10,6 +12,7 @@ router.get('/', async (req, res) => {
 router.get('/home', async (req, res) => {
     try {
         const blogpostData = await Blogpost.findAll({
+            // Include associated Users' usernames
             include: [
                 {
                     model: User,
@@ -18,7 +21,7 @@ router.get('/home', async (req, res) => {
             ]
         });
 
-        const blogposts = blogpostData.map((post => post.get({ plain: true })));
+        const blogposts = blogpostData.map((blogpost => blogpost.get({ plain: true })));
 
         res.render('home', {
             blogposts,
@@ -29,6 +32,7 @@ router.get('/home', async (req, res) => {
     }
 });
 
+// At /dashboard, show all of user's blogposts, button for new post
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const blogpostData = await Blogpost.findAll({
@@ -43,9 +47,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
             ]
         });
 
-        const blogposts = blogpostData.map((post => post.get({ plain: true })));
+        const blogposts = blogpostData.map((blogpost => blogpost.get({ plain: true })));
 
+        // Check if user has clicked on new post button
         let creatingPost = false;
+        // If /dashboard?creatingPost=true
         if (req.query.creatingPost) {
             creatingPost = true;
         }
@@ -60,6 +66,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     };
 })
 
+// At /posts/:id, show all comments on blogpost and new comment form
 router.get('/posts/:id', withAuth, async (req, res) => {
     try {
         console.log('\nReached /posts/:id \n');
@@ -70,6 +77,7 @@ router.get('/posts/:id', withAuth, async (req, res) => {
                     model: User,
                     attributes: ['username']
                 },
+                // Include associated comments on blogpost, and users' usernames who left comments 
                 {
                     model: Comment,
                     include: [
@@ -85,9 +93,35 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 
         const blogpost = blogpostData.get({ plain: true });
     
-        res.render('post', {
+        res.render('blogpost', {
             blogpost,
             comments: blogpost.comments,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// At /dashboard/posts/:id, show form to edit blogpost
+router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
+    try {
+        console.log('\nReached /dashboard/posts/:id \n');
+
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+        ]});
+    
+        console.log(blogpostData);
+
+        const blogpost = blogpostData.get({ plain: true });
+    
+        res.render('edit-blogpost', {
+            blogpost,
             loggedIn: req.session.loggedIn
         });
     } catch (err) {

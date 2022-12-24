@@ -1,18 +1,18 @@
+{{!-- Create card for each blogpost --}}
 {{#each blogposts as |post|}}
 
 <section class="card" id="post-{{post.id}}">
-    <section class="card-header d-flex justfiy-content-between">
-        <p>{{post.title}} </p>
-        <p>{{post.user.username}} </p>
-        <p>{{format_date post.date_created}}</p>
+    <section class="card-header d-flex flex-row justify-content-between">
+        <p>{{post.title}}</p>
+        <p>Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
     </section>
 
     <section class="card-body">
         {{post.content}}
     </section>
-
 </section>
 
 {{/each}}
 
+{{!-- Script allows user to click on blogpost and create/view comments --}}
 <script src="./js/blogpost.js"></script>
