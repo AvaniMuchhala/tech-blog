@@ -20,4 +20,22 @@ router.post('/:id/comments', async (req, res) => {
     }
 });
 
+// POST request to create new blogpost
+router.post('/', async (req, res) => {
+    console.log('\nReached /posts');
+    console.log(req.body);
+    try {
+        const postData = await Blogpost.create({
+            title: req.body.postTitle,
+            content: req.body.postBody,
+            user_id: req.session.userId
+        });
+
+        res.status(200).json(postData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

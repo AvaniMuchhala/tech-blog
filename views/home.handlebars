@@ -2,7 +2,7 @@
 {{log this}}
 {{!-- <h1>Home!</h1> --}}
 <section class="blog-section d-flex flex-column">
-    {{#each blogposts as |post|}}
+    {{!-- {{#each blogposts as |post|}}
 
     <section class="card" id="post-{{post.id}}">
         <section class="card-header d-flex justfiy-content-between">
@@ -17,7 +17,10 @@
 
     </section>
 
-    {{/each}}
+    {{/each}} --}}
+
+    {{> post-partial}}
+
 </section>
 
-<script src="./js/blogpost.js"></script>
+{{!-- <script src="./js/blogpost.js"></script> --}}

@@ -1,7 +1,7 @@
 {{!-- Dashboard with existing blog posts by user --}}
 {{log this}}
 <section class="blog-section d-flex flex-column">
-    {{#each blogposts as |post|}}
+    {{!-- {{#each blogposts as |post|}}
 
     <section class="card" id="post-{{post.id}}">
         <section class="card-header d-flex justfiy-content-between">
@@ -16,7 +16,20 @@
 
     </section>
 
-    {{/each}}
+    {{/each}} --}}
+
+    {{#if creatingPost}}
+        {{> create-post}}
+    {{else}}
+        {{> post-partial}}
+        <button>+ New Post</button>
+    {{/if}}
+    
+    
 </section>
 
-{{!-- <script src="./js/blogpost.js"></script> --}}
+{{#if creatingPost}}
+<script src="./js/create-post.js"></script>
+{{else}}
+<script src="./js/dashboard.js"></script>
+{{/if}}

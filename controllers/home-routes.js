@@ -45,9 +45,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
         const blogposts = blogpostData.map((post => post.get({ plain: true })));
 
+        let creatingPost = false;
+        if (req.query.creatingPost) {
+            creatingPost = true;
+        }
+
         res.render('dashboard', {
             blogposts,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            creatingPost
         });
     } catch (err) {
         res.status(500).json(err);
