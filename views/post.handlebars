@@ -6,7 +6,7 @@
         <section class="card-header d-flex justfiy-content-between">
             <p>{{blogpost.title}} </p>
             <p>{{blogpost.user.username}} </p>
-            <p>{{blogpost.date_created}}</p>
+            <p>{{format_date blogpost.date_created}}</p>
         </section>
 
         <section class="card-body">
@@ -36,7 +36,7 @@
     <section class="card" id="comment-{{comment.id}}">
         <section class="card-header d-flex justfiy-content-between">
             <p>{{comment.user.username}} </p>
-            <p>{{comment.date_created}}</p>
+            <p>{{format_date comment.date_created}}</p>
         </section>
 
         <section class="card-body">
