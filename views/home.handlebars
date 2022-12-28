@@ -1,25 +1,5 @@
 {{!-- Home page with existing blog posts --}}
-{{log this}}
 
 <section class="blog-section d-flex flex-column">
-    {{!-- {{#each blogposts as |post|}}
-
-    <section class="card" id="post-{{post.id}}">
-        <section class="card-header d-flex justfiy-content-between">
-            <p>{{post.title}} </p>
-            <p>{{post.user.username}} </p>
-            <p>{{post.date_created}}</p>
-        </section>
-
-        <section class="card-body">
-            {{post.content}}
-        </section>
-
-    </section>
-
-    {{/each}} --}}
-
     {{> post-partial}}
 </section>
-
-{{!-- <script src="./js/blogpost.js"></script> --}}

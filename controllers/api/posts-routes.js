@@ -3,7 +3,7 @@ const { User, Blogpost, Comment } = require('../../models');
 // Custom middleware to check whether user is logged in or not
 const withAuth = require('../../utils/withAuth');
 
-// POST request to create new comment
+// Create new comment on blogpost
 router.post('/:id/comments', withAuth, async (req, res) => {
     console.log('\nReached /:id/comments');
     console.log(req.session);
@@ -13,7 +13,6 @@ router.post('/:id/comments', withAuth, async (req, res) => {
             user_id: req.session.userId,
             blogpost_id: req.params.id
         });
-        console.log('Hello');
 
         res.status(200).json(commentData);
     } catch (err) {
@@ -22,7 +21,7 @@ router.post('/:id/comments', withAuth, async (req, res) => {
     }
 });
 
-// POST request to create new blogpost
+// Create new blogpost on dashboard & home
 router.post('/', withAuth, async (req, res) => {
     console.log('\nReached /posts');
     console.log(req.body);

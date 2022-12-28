@@ -1,6 +1,6 @@
 /* CSS Variables */
 :root {
-    --dark: rgb(154, 6, 6);
+    --dark: rgb(101, 5, 5);
     --light: rgb(255, 214, 184);
 }
 
@@ -17,11 +17,11 @@ li {
     display: inline;
     font-size: 2.2rem;
     padding: 2%;
-    
 }
 
 li a {
     color: var(--light);
+    text-decoration: none;
 }
 
 header {
@@ -49,3 +49,20 @@ header {
     display: flex;
     display: inline;
 } */
+
+/* Blogpost, comments, forms card styles */
+.card {
+    border: solid var(--dark) 3px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card-header {
+    background-color: var(--dark) !important;
+}
+
+.card-body {
+    background-color: var(--light);
+}

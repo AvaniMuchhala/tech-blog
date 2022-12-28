@@ -9,6 +9,7 @@ const delPostHandler = async (event) => {
         method: 'DELETE',
     });
 
+    // If response is ok, render dashboard with updated list of user's blogposts
     if (response.ok) {
         console.log('Deleted post successfully!');
         document.location.replace('/dashboard');
@@ -35,6 +36,7 @@ const updatePostHandler = async (event) => {
         headers: { 'Content-Type': 'application/json' }
     });
 
+    // If response is ok, render dashboard with updated list of user's blogposts
     if (response.ok) {
         console.log('Updated post successfully!');
         document.location.replace('/dashboard');

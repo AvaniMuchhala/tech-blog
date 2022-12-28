@@ -8,4 +8,9 @@ const homeRoutes = require('./home-routes.js');
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
 
+// Wildcard route
+router.get('*', (req, res) =>
+  res.status(404).json({ message: "not found"})
+);
+
 module.exports = router;

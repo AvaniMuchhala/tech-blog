@@ -1,9 +1,10 @@
+// If user clicks on blogpost while on /home, allow them to leave/view comments
+// If user clicks on blogpost while on /dashboard, allow them to edit blogpost
+
 const blogpostHandler = (event) => {
     event.preventDefault();
 
-    console.log('Blogpost clicked on');
-    console.log(event.target.closest('.card'));
-
+    // Find closest parent element with 'card' class
     // Grab ID of the blogpost that was clicked on
     const id = event.target.closest('.card').id.split('-')[1];
     console.log(id);
@@ -14,8 +15,8 @@ const blogpostHandler = (event) => {
     console.log(page);
 
     if (page === 'home') {
-        // Bring user to /posts/id# (leave/view comments)
-        document.location.replace(`/posts/${id}`);
+        // Bring user to home/posts/id# (leave/view comments)
+        document.location.replace(`/home/posts/${id}`);
     } else if (page === 'dashboard') {
         // Bring user to /dashboard/posts/id# (update/delete blogpost)
         document.location.replace(`/dashboard/posts/${id}`);

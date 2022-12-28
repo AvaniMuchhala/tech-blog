@@ -32,7 +32,7 @@ router.get('/home', async (req, res) => {
     }
 });
 
-// At /dashboard, show all of user's blogposts, button for new post
+// At /dashboard, if logged in, show all of user's blogposts, button for new post
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const blogpostData = await Blogpost.findAll({
@@ -59,7 +59,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
         res.render('dashboard', {
             blogposts,
             loggedIn: req.session.loggedIn,
-            creatingPost
+            creatingPost,
+            dashboard: true
         });
     } catch (err) {
         res.status(500).json(err);
@@ -67,7 +68,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 })
 
 // At /posts/:id, show all comments on blogpost and new comment form
-router.get('/posts/:id', async (req, res) => {
+router.get('/home/posts/:id', async (req, res) => {
     try {
         console.log('\nReached /posts/:id \n');
 
@@ -77,19 +78,23 @@ router.get('/posts/:id', async (req, res) => {
                     model: User,
                     attributes: ['username']
                 },
-                // Include associated comments on blogpost, and users' usernames who left comments 
+                // Include associated comments on blogpost, and users who left comments 
                 {
                     model: Comment,
                     include: [
                         {
                             model: User,
-
                         }
                     ]
                 }
         ]});
     
         console.log(blogpostData);
+
+        if (!blogpostData) {
+            res.status(404).json({ message: 'No blogpost found with this ID!' });
+            return;
+        }
 
         const blogpost = blogpostData.get({ plain: true });
     
@@ -122,7 +127,8 @@ router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
     
         res.render('edit-blogpost', {
             blogpost,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            dashboard: true
         });
     } catch (err) {
         res.status(500).json(err);
@@ -142,9 +148,9 @@ router.get('/login', (req, res) => {
 
 // Sign up route
 router.get('/signup', (req, res) => {
-    // If already logged in, redirect user to dashboard
+    // If already logged in, redirect user to dashboard 
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.redirect('/dashboard');
         return;
     } 
     // If not logged in, render signup page
@@ -154,6 +160,7 @@ router.get('/signup', (req, res) => {
 // Log out
 router.get('/logout', (req, res) => {
     console.log('\nReached logout route\n');
+    // If already logged in, destroy session, redirect user to home
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             console.log('\nLogging out\n');

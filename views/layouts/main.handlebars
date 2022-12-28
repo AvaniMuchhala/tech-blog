@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="mb-3">
         <nav>
             <ul>
                 <li> <a href="/home">Home</a> </li>
@@ -30,16 +30,20 @@
             </ul>
         </nav>
 
+        {{#if dashboard}}
+        <h1 id="title-box">Dashboard</h1>
+        {{else}}
         <h1 id="title-box">The Tech Blog</h1>
+        {{/if}}
     </header>
 
     <section class="d-flex justify-content-center">
         {{{body}}}
     </section>
 
-    {{#if loggedIn}}
+    {{!-- {{#if loggedIn}}
     <script src="./js/idle-checker.js"></script>
-    {{/if}}
+    {{/if}} --}}
 </body>
 
 </html>

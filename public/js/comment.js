@@ -1,7 +1,8 @@
+// Handle submit comment form behavior 
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
-    console.log('Submitted comment form');
+    console.log('Submit button pressed');
 
     const comment = document.getElementById('comment').value.trim();
     const postID = document.getElementById('post-id').value.trim();
@@ -27,6 +28,5 @@ const commentFormHandler = async (event) => {
         }
     }
 }
-
 
 document.querySelector('form').addEventListener('submit', commentFormHandler);

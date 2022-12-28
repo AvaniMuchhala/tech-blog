@@ -43,11 +43,13 @@ router.post('/login', async (req, res) => {
 // Sign up
 router.post('/signup', async (req, res) => {
     try {
+        // Create new User with provided username and password
         const userData = await User.create({
             username: req.body.username,
             password: req.body.password
         });
 
+        // Set loggedIn to true
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userId = userData.id;

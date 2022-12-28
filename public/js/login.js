@@ -14,7 +14,6 @@ const loginFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        // what is response.ok? status of 200
         if (response.ok) {
             // render dashboard page
             console.log('Logged in successfully!');

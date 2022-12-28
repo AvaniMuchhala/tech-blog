@@ -1,12 +1,12 @@
-{{!-- Single blogpost --}}
+{{!-- Display single blogpost, comment form, and list of existing comments --}}
 {{log this}}
 
 <section class="d-flex flex-column">
+    {{!-- Single blogpost --}}
     <section class="card" id="post-{{blogpost.id}}">
-        <section class="card-header d-flex justfiy-content-between">
-            <p>{{blogpost.title}} </p>
-            <p>{{blogpost.user.username}} </p>
-            <p>{{format_date blogpost.date_created}}</p>
+        <section class="card-header d-flex flex-row justify-content-between">
+            <p>{{blogpost.title}}</p>
+            <p>Posted by {{blogpost.user.username}} on {{format_date blogpost.date_created}}</p>
         </section>
 
         <section class="card-body">
@@ -14,9 +14,10 @@
         </section>
     </section>
 
-    {{!-- Comments form --}}
+    {{!-- Comment form --}}
     <section class="card">
-        <section class="card-header d-flex justfiy-content-between">
+        <section class="card-header">
+            <p></p>
         </section>
 
         <section class="card-body">
@@ -27,26 +28,25 @@
                 <button type="submit">Submit</button>
             </form>
         </section>
-
     </section>
 
+    {{!-- List of existing comments --}}
     <section class="comments-section d-flex flex-column">
-    {{#each comments as |comment|}}
 
-    <section class="card" id="comment-{{comment.id}}">
-        <section class="card-header d-flex justfiy-content-between">
-            <p>{{comment.user.username}} </p>
-            <p>{{format_date comment.date_created}}</p>
-        </section>
+        {{#each comments as |comment|}}
+        <section class="card" id="comment-{{comment.id}}">
+            <section class="card-header">
+                <p></p>
+            </section>
 
-        <section class="card-body">
-            {{comment.body}}
+            <section class="card-body">
+                {{comment.body}}
+                <p>--{{comment.user.username}}, {{format_date comment.date_created}}</p>
+            </section>
         </section>
+        {{/each}}
 
     </section>
-
-    {{/each}}
-</section>
 </section>
 
-<script src="../js/comment.js"></script>
+<script src="../../js/comment.js"></script>

@@ -1,4 +1,4 @@
-// Create new blogpost
+// Click New Post button --> show new post form
 const newPostHandler = async (event) => {
     event.preventDefault();
 
