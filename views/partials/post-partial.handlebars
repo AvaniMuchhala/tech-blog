@@ -1,14 +1,14 @@
 {{!-- Create card for each blogpost --}}
 {{#each blogposts as |post|}}
 
-<section class="card" id="post-{{post.id}}">
+<section class="card clickable-card" id="post-{{post.id}}">
     <section class="card-header d-flex flex-row justify-content-between">
-        <p>{{post.title}}</p>
+        <p><b>{{post.title}}</b></p>
         <p>Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
     </section>
 
     <section class="card-body">
-        {{post.content}}
+        <p>{{post.content}}</p>
     </section>
 </section>
 

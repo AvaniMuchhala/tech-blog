@@ -23,4 +23,4 @@ const blogpostHandler = (event) => {
     }
 }
 
-document.querySelectorAll('.card').forEach(card => card.addEventListener('click', blogpostHandler));
+document.querySelectorAll('.clickable-card').forEach(card => card.addEventListener('click', blogpostHandler));

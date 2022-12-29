@@ -8,6 +8,10 @@ body {
     background-color: var(--light);
 }
 
+p {
+    font-size: 1.2rem;
+}
+
 /* Header */
 header {
     background-color: var(--dark);
@@ -30,6 +34,15 @@ li {
 li a {
     color: var(--light);
     text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: none;
+}
+
+.login-signup-anchor {
+    text-decoration: none;
+    color: black;
 }
 
 /* Tech Blog/ Your Dashboard Title */
@@ -71,7 +84,7 @@ li a {
     border: solid var(--dark) 3px;
 }
 
-.card:hover {
+.clickable-card:hover {
     cursor: pointer;
 }
 

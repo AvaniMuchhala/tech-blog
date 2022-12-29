@@ -1,12 +1,12 @@
 {{!-- Dashboard with existing blog posts by user --}}
 {{log this}}
 
-<section class="blog-section d-flex flex-column">
+<section class="blog-section d-flex flex-column col-10">
     {{#if creatingPost}}
         {{> create-post}}
     {{else}}
         {{> post-partial}}
-        <button>+ New Post</button>
+        <button class="btn btn-secondary"><b>+ New Post</b></button>
     {{/if}}
 </section>
 
