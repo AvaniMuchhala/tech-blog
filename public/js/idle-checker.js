@@ -1,39 +1,29 @@
-var inactivityTime = function () {
-    console.log('inactivityTime()');
-    var time;
+// Logs user out if idle/inactive
+let inactivityTime = function () {
+    let time;
+    // Events that indicate user is still active and will reset timer
     window.onload = resetTimer;
-    window.onmousemove = resetTimer;
-    window.onmousedown = resetTimer;  // catches touchscreen presses as well      
-    window.ontouchstart = resetTimer; // catches touchscreen swipes as well      
-    window.ontouchmove = resetTimer;  // required by some devices 
-    window.onclick = resetTimer;      // catches touchpad clicks as well
-    window.onkeydown = resetTimer;   
-    //window.addEventListener('scroll', resetTimer, true); // improved; see comments
+    document.onload = resetTimer;
+    document.onmousemove = resetTimer;
+    document.onmousedown = resetTimer;
+    document.ontouchstart = resetTimer;
+    document.onclick = resetTimer;
+    document.onkeypress = resetTimer;
+    document.addEventListener('scroll', resetTimer, true);
 
     function logout() {
-        // try {
-        //     const response = await fetch('/logout', {
-        //         method: 'GET'
-        //     });
-    
-        //     if (response.ok) {
-        //         console.log('Logged out due to idle.');
-        //         document.location.replace('/home');
-        //         alert('You have been logged out.');
-        //     }
-        // } catch (err) {
-        //     console.error(err);
-        // }
-        console.log('You have been logged out.');
+        alert("You have been logged out due to inactivity.");
+        document.location.replace('/logout');
     }
 
+    // After 5 min of inactivity, log user out,
+    // Unless timer has been reset due to one of the listed events
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(logout, 1000);
+        time = setTimeout(logout, 5*60*1000);
     }
 };
 
 window.onload = function () {
-    console.log('idle-checker script');
     inactivityTime();
 }

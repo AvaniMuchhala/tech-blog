@@ -23,7 +23,7 @@ const createPostHandler = async (event) => {
             console.log('Posted succesfully!');
             document.location.replace('/dashboard');
         } else {
-            alert('Failed to submit comment.');
+            alert('Failed to create blogpost.');
         }
     }
 }
