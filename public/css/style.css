@@ -16,7 +16,7 @@ p {
 header {
     background-color: var(--dark);
     color: white;
-    height: 12rem;
+    min-height: 12rem;
     position: relative;
 }
 
@@ -72,13 +72,6 @@ li a:hover {
     color: var(--light);
 }
 
-/* Login form card */
-/* #form-card {
-    width: 80%;
-    display: flex;
-    display: inline;
-} */
-
 /* Blogpost, comments, forms card styles */
 .card {
     border: solid var(--dark) 3px;
@@ -94,4 +87,20 @@ li a:hover {
 
 .card-body {
     background-color: var(--light);
+}
+
+/* For smaller screens, nav bar vertical, center title and hello username section  */
+@media screen and (max-width: 700px) {
+    nav li {
+        display: block;
+        padding: 0;
+    } 
+
+    #title-user {
+        justify-content: center !important;
+    }
+
+    #hello-user {
+        text-align: center !important;
+    }
 }
