@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Blogpost, Comment } = require('../models');
+const findUsername = require('../utils/findUsername');
 // Custom middleware to check whether user is logged in or not
 const withAuth = require('../utils/withAuth');
 
@@ -23,9 +24,12 @@ router.get('/home', async (req, res) => {
 
         const blogposts = blogpostData.map((blogpost => blogpost.get({ plain: true })));
 
+        const loggedInUsername = await findUsername(req);
+        
         res.render('home', {
             blogposts,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            username: loggedInUsername
         });
     } catch (err) {
         res.status(500).json(err);
@@ -56,11 +60,14 @@ router.get('/dashboard', withAuth, async (req, res) => {
             creatingPost = true;
         }
 
+        const loggedInUsername = await findUsername(req);
+
         res.render('dashboard', {
             blogposts,
             loggedIn: req.session.loggedIn,
             creatingPost,
-            dashboard: true
+            dashboard: true,
+            username: loggedInUsername
         });
     } catch (err) {
         res.status(500).json(err);
@@ -98,10 +105,13 @@ router.get('/home/posts/:id', async (req, res) => {
 
         const blogpost = blogpostData.get({ plain: true });
     
+        const loggedInUsername = await findUsername(req);
+
         res.render('blogpost', {
             blogpost,
             comments: blogpost.comments,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            username: loggedInUsername
         });
     } catch (err) {
         res.status(500).json(err);
@@ -125,10 +135,13 @@ router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
 
         const blogpost = blogpostData.get({ plain: true });
     
+        const loggedInUsername = await findUsername(req);
+
         res.render('edit-blogpost', {
             blogpost,
             loggedIn: req.session.loggedIn,
-            dashboard: true
+            dashboard: true,
+            username: loggedInUsername
         });
     } catch (err) {
         res.status(500).json(err);

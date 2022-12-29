@@ -30,11 +30,21 @@
             </ul>
         </nav>
 
-        {{#if dashboard}}
-        <h1 id="title-box">Dashboard</h1>
-        {{else}}
-        <h1 id="title-box">The Tech Blog</h1>
-        {{/if}}
+        <section class="d-flex flex-row justify-content-between" id="title-user">
+            <section class="card border-0" id="title-card">
+                <section class="card-body" id="title-body">
+                    {{#if dashboard}}
+                    <h1 class="title"><b>Your Dashboard</b></h1>
+                    {{else}}
+                    <h1 class="title"><b>The Tech Blog</b></h1>
+                    {{/if}}
+                </section>
+            </section>
+        
+            {{#if loggedIn}}
+            <h1 id="hello-user" class="align-self-end">Hello {{username}}!</h1>
+            {{/if}}
+        </section>
     </header>
 
     <section class="d-flex justify-content-center">
