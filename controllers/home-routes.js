@@ -74,11 +74,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
     };
 })
 
-// At /posts/:id, show all comments on blogpost and new comment form
+// At /home/posts/:id, show all comments on blogpost and new comment form
 router.get('/home/posts/:id', async (req, res) => {
     try {
-        console.log('\nReached /posts/:id \n');
-
         const blogpostData = await Blogpost.findByPk(req.params.id, {
             include: [
                 {
@@ -96,8 +94,6 @@ router.get('/home/posts/:id', async (req, res) => {
                 }
         ]});
     
-        console.log(blogpostData);
-
         if (!blogpostData) {
             res.status(404).json({ message: 'No blogpost found with this ID!' });
             return;
@@ -121,8 +117,6 @@ router.get('/home/posts/:id', async (req, res) => {
 // At /dashboard/posts/:id, show form to edit blogpost
 router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
     try {
-        console.log('\nReached /dashboard/posts/:id \n');
-
         const blogpostData = await Blogpost.findByPk(req.params.id, {
             include: [
                 {
@@ -131,8 +125,6 @@ router.get('/dashboard/posts/:id', withAuth, async (req, res) => {
                 },
         ]});
     
-        console.log(blogpostData);
-
         const blogpost = blogpostData.get({ plain: true });
     
         const loggedInUsername = await findUsername(req);
@@ -172,11 +164,9 @@ router.get('/signup', (req, res) => {
 
 // Log out
 router.get('/logout', (req, res) => {
-    console.log('\nReached logout route\n');
     // If already logged in, destroy session, redirect user to home
     if (req.session.loggedIn) {
         req.session.destroy(() => {
-            console.log('\nLogging out\n');
             res.redirect('/');
         });
     } else {

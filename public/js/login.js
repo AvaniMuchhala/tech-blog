@@ -15,12 +15,12 @@ const loginFormHandler = async (event) => {
         });
 
         if (response.ok) {
-            // render dashboard page
-            console.log('Logged in successfully!');
             document.location.replace('/dashboard');
         } else {
             alert('Failed to log in.');
         }
+    } else {
+        alert('Please provide both the username and password.');
     }
 };
 

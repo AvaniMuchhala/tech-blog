@@ -1,5 +1,5 @@
 // Logs user out if idle/inactive
-let inactivityTime = function () {
+let idleTime = function () {
     let time;
     // Events that indicate user is still active and will reset timer
     window.onload = resetTimer;
@@ -25,5 +25,5 @@ let inactivityTime = function () {
 };
 
 window.onload = function () {
-    inactivityTime();
+    idleTime();
 }

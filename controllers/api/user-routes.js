@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-// Login
+// Login existing user
 router.post('/login', async (req, res) => {
     try {
         // Find User with same username provided
@@ -30,7 +30,6 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userId = dbUserData.id;
-            console.log('\nLogged in\n');
             res.status(200).json({ user: dbUserData, message: 'Successfully logged in!' });
             return;
         });
@@ -40,7 +39,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Sign up
+// Sign up new user
 router.post('/signup', async (req, res) => {
     try {
         // Check if username is already taken
@@ -68,7 +67,6 @@ router.post('/signup', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userId = userData.id;
-            console.log('\nSigned up\n');
             res.status(200).json(userData);
             return;
         });

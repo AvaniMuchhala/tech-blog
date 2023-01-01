@@ -7,12 +7,9 @@ const blogpostHandler = (event) => {
     // Find closest parent element with 'card' class
     // Grab ID of the blogpost that was clicked on
     const id = event.target.closest('.card').id.split('-')[1];
-    console.log(id);
 
-    console.log(`\n ${window.location.href} \n`);
     let page = window.location.href.split('/');
     page = page[page.length-1]; 
-    console.log(page);
 
     if (page === 'home') {
         // Bring user to home/posts/id# (leave/view comments)

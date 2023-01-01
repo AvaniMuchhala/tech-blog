@@ -1,9 +1,8 @@
+// Delete user's blogpost
 const delPostHandler = async (event) => {
     event.preventDefault();
-    console.log('Delete button clicked.');
 
     const id = document.getElementById('post-id').value;
-    console.log(id);
 
     const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
@@ -11,21 +10,20 @@ const delPostHandler = async (event) => {
 
     // If response is ok, render dashboard with updated list of user's blogposts
     if (response.ok) {
-        console.log('Deleted post successfully!');
         document.location.replace('/dashboard');
     } else {
         alert('Failed to delete post.');
     }
 };
 
+// Update user's blogpost
 const updatePostHandler = async (event) => {
     event.preventDefault();
-    console.log('Update post button clicked.');
 
+    // Grab blogpost ID, and updated title and content from form
     const id = document.getElementById('post-id').value;
     const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
-    console.log(id);
 
     const response = await fetch(`/api/posts/${id}`, {
         method: 'PUT',
@@ -38,7 +36,6 @@ const updatePostHandler = async (event) => {
 
     // If response is ok, render dashboard with updated list of user's blogposts
     if (response.ok) {
-        console.log('Updated post successfully!');
         document.location.replace('/dashboard');
     } else {
         alert('Failed to update post.');

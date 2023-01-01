@@ -2,8 +2,6 @@
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
-    console.log('Submit button pressed');
-
     const comment = document.getElementById('comment').value.trim();
     const postID = document.getElementById('post-id').value.trim();
 
@@ -21,12 +19,13 @@ const commentFormHandler = async (event) => {
                 document.location.replace('/login');
             // If user logged in, new comment was added successfully
             } else {
-                console.log('Commented succesfully!');
                 document.location.reload();
             }
         } else {
             alert('Failed to submit comment.');
         }
+    } else {
+        alert('Please enter a comment.');
     }
 }
 

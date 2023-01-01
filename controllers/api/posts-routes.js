@@ -5,8 +5,6 @@ const withAuth = require('../../utils/withAuth');
 
 // Create new comment on blogpost
 router.post('/:id/comments', withAuth, async (req, res) => {
-    console.log('\nReached /:id/comments');
-    console.log(req.session);
     try {
         const commentData = await Comment.create({
             body: req.body.comment,
@@ -23,8 +21,6 @@ router.post('/:id/comments', withAuth, async (req, res) => {
 
 // Create new blogpost on dashboard & home
 router.post('/', withAuth, async (req, res) => {
-    console.log('\nReached /posts');
-    console.log(req.body);
     try {
         const postData = await Blogpost.create({
             title: req.body.postTitle,
@@ -41,8 +37,6 @@ router.post('/', withAuth, async (req, res) => {
 
 // Delete user's blogpost with same ID
 router.delete('/:id', withAuth, async (req, res) => {
-    console.log('\n Reached /posts/:id');
-
     try {
         const postData = await Blogpost.destroy({
             where: {
@@ -65,8 +59,6 @@ router.delete('/:id', withAuth, async (req, res) => {
 
 // Update user's blogpost with same ID
 router.put('/:id', withAuth, async (req, res) => {
-    console.log('\n Reached PUT request at /posts/:id');
-
     try {
         const postData = await Blogpost.update(
             {
