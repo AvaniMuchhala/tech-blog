@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 
 // Sets up session and connect to our Sequelize db
 const sess = {
-  secret: process.env.SECRET,
+  secret: 'super secret',
   cookie: {
     // Cookie (and session) will expire after one hour
     maxAge: 60 * 60 * 1000
