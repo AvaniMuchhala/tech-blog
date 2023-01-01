@@ -43,7 +43,22 @@ router.post('/login', async (req, res) => {
 // Sign up
 router.post('/signup', async (req, res) => {
     try {
-        // Create new User with provided username and password
+        // Check if username is already taken
+        const findUser = await User.findOne(
+            {
+                where: {
+                    username: req.body.username
+                }
+            }
+        );
+
+        // Found user with same username
+        if (findUser !== null) {
+            res.status(400).json(findUser);
+            return;
+        }
+
+        // Create new User with provided username and password (if username is unique)
         const userData = await User.create({
             username: req.body.username,
             password: req.body.password

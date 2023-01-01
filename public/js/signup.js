@@ -14,13 +14,15 @@ const signupFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        // what is response.ok? status of 200
         if (response.ok) {
-            // render dashboard page
             console.log('Signed up successfully!');
             document.location.replace('/');
         } else {
-            alert('Failed to sign up.');
+            if (response.status === 400) {
+                alert('Username already exists.');
+            } else {
+                alert('Failed to sign up.');
+            }
         }
     }
 };
