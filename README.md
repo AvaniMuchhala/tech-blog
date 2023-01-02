@@ -13,9 +13,10 @@ Tech Blog is a CMS-style blog site for developers to publish their own tech-rela
 
 ## Usage
 
-Click on the website URL:
+Click on the website URL: https://avani-tech-blog.herokuapp.com/
 
 Below is an animation demonstrating how to use the application:
+![tech blog demo](./assets/tech-blog-demo-gif.gif)
 
 Any user may view the blog posts and related comments on the home page. Users should sign up/login to leave comments on blog posts on the home page as well as create/update/delete their own blog posts on the dashboard.
 
